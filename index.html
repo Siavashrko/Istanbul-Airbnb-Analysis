@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Istanbul Airbnb Market Analysis</title>
+  <meta name="description" content="Istanbul Airbnb market analysis: occupancy, revenue, room type, and neighborhood performance insights.">
+  <meta property="og:title" content="Istanbul Airbnb Market Analysis">
+  <meta property="og:description" content="Data-driven Airbnb analysis for Istanbul with visuals and key business findings.">
+  <meta property="og:image" content="https://siavashrko.github.io/Istanbul-Airbnb-Analysis/visuals/istanbul-cover.jpg">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://siavashrko.github.io/Istanbul-Airbnb-Analysis/">
+  <style>
+    :root { --bg:#0b1020; --card:#131a33; --text:#e8edff; --muted:#b4c0ef; --accent:#6ea8fe; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: Arial, sans-serif; background:var(--bg); color:var(--text); line-height:1.55; }
+    .wrap { max-width: 1000px; margin: 0 auto; padding: 20px; }
+    .hero img { width:100%; border-radius: 12px; display:block; }
+    h1,h2,h3 { margin: 0 0 10px; }
+    h1 { font-size: 2rem; margin-top: 18px; }
+    p { color: var(--muted); margin-top:0; }
+    .grid { display:grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap:14px; margin: 14px 0 24px; }
+    .card { background: var(--card); border:1px solid #253160; border-radius: 12px; padding: 14px; }
+    .card h3 { font-size: 1rem; color: var(--accent); }
+    .btns { display:flex; gap:10px; flex-wrap:wrap; margin: 12px 0 24px; }
+    .btn { text-decoration:none; color:#00143c; background:#8ab4ff; padding:10px 14px; border-radius: 8px; font-weight:700; }
+    .btn.alt { background:#2a3b78; color:#dbe6ff; }
+    .viz { margin: 20px 0; }
+    .viz img { width:100%; border-radius: 10px; border:1px solid #263364; }
+    footer { margin:26px 0 10px; color:#9ca8d8; font-size:.95rem; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <img src="visuals/istanbul-cover.jpg" alt="Istanbul cover">
+      <h1>Istanbul Airbnb Market Analysis</h1>
+      <p>A portfolio data project analyzing pricing, occupancy, and revenue patterns in Istanbul Airbnb listings.</p>
+    </section>
+
+    <section>
+      <h2>Project Goal</h2>
+      <p>Find which neighborhoods and listing features are associated with higher occupancy and stronger revenue performance.</p>
+    </section>
+
+    <section>
+      <h2>Key Factors</h2>
+      <div class="grid">
+        <div class="card"><h3>Neighborhood</h3><p>Location concentration and demand distribution across districts.</p></div>
+        <div class="card"><h3>Room Type</h3><p>Entire home vs private room performance difference.</p></div>
+        <div class="card"><h3>Host Quality</h3><p>Superhost status impact on listing activity.</p></div>
+        <div class="card"><h3>Price Positioning</h3><p>Price level relationship with occupancy and revenue.</p></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Top Findings</h2>
+      <div class="grid">
+        <div class="card"><h3>Market Concentration</h3><p>Beyoglu leads active listing concentration and performance.</p></div>
+        <div class="card"><h3>Active vs Inactive Split</h3><p>A large share of listings show zero estimated occupancy.</p></div>
+        <div class="card"><h3>Listing Type Effect</h3><p>Entire homes are much more common among active listings.</p></div>
+        <div class="card"><h3>Superhost Effect</h3><p>Superhost share is significantly higher in active listings.</p></div>
+      </div>
+    </section>
+
+    <section class="viz">
+      <h2>Visualizations</h2>
+      <h3>Median Occupancy by Neighborhood</h3>
+      <img src="visuals/occupancy_by_neighborhood.png" alt="Median occupancy by neighborhood">
+      <h3>Median Revenue by Neighborhood</h3>
+      <img src="visuals/revenue_by_neighborhood.png" alt="Median revenue by neighborhood">
+      <h3>Room Type: Active vs Inactive</h3>
+      <img src="visuals/room_type_comparison.png" alt="Room type comparison">
+      <h3>Superhost: Active vs Inactive</h3>
+      <img src="visuals/superhost_comparison.png" alt="Superhost comparison">
+      <h3>Price Distribution</h3>
+      <img src="visuals/price_distribution.png" alt="Price distribution">
+    </section>
+
+    <div class="btns">
+      <a class="btn" href="report.html">View Full Notebook Report</a>
+      <a class="btn alt" href="https://github.com/Siavashrko/Istanbul-Airbnb-Analysis">View GitHub Repository</a>
+    </div>
+
+    <footer>
+      Built by Siavashrko • Data source: Inside Airbnb (Istanbul)
+    </footer>
+  </div>
+</body>
+</html>
