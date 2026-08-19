@@ -7541,6 +7541,51 @@ a.anchor-link {
 </style>
 <!-- End of mermaid configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
+<div style="max-width:980px;margin:22px auto;padding:0 16px;">
+  <h1 style="margin:0 0 8px;color:#93c5fd;">Istanbul Airbnb Market Analysis</h1>
+  <p style="margin:0 0 16px;color:#c7d2fe;">A notebook-style report with structured business framing: problem, goal, factors, and data relationships.</p>
+
+  <h2 style="color:#93c5fd;">Introduction</h2>
+  <p>Istanbul has a large Airbnb supply, but supply alone does not guarantee performance. This analysis investigates market activity patterns and separates successful listing profiles from inactive ones.</p>
+
+  <h2 style="color:#93c5fd;">Problem Statement</h2>
+  <p>A high share of listings show zero estimated occupancy over the previous 365 days. The project investigates what differentiates active listings from inactive ones.</p>
+
+  <h2 style="color:#93c5fd;">Goal</h2>
+  <p>Identify which location, listing, and host factors are associated with higher occupancy and stronger revenue potential in Istanbul.</p>
+
+  <h2 style="color:#93c5fd;">How the Goal Was Detected Through Data</h2>
+  <ol>
+    <li>Audit missing values and column data types.</li>
+    <li>Clean and normalize price values, then treat outliers.</li>
+    <li>Inspect occupancy and revenue distributions.</li>
+    <li>Segment listings into active/inactive groups using occupancy.</li>
+    <li>Compare factors between both segments.</li>
+  </ol>
+
+  <h2 style="color:#93c5fd;">Key Factors</h2>
+  <ul>
+    <li><b>Location:</b> neighbourhood_cleansed</li>
+    <li><b>Listing type:</b> room_type, property_type</li>
+    <li><b>Capacity:</b> accommodates, bedrooms, beds, bathrooms</li>
+    <li><b>Host quality:</b> host_is_superhost</li>
+    <li><b>Engagement:</b> number_of_reviews, review_scores_rating</li>
+    <li><b>Targets:</b> price, estimated_occupancy_l365d, estimated_revenue_l365d</li>
+  </ul>
+
+  <h2 style="color:#93c5fd;">Data Headers (Used Columns)</h2>
+  <p><code>id, neighbourhood_cleansed, room_type, property_type, price, accommodates, bedrooms, beds, bathrooms, host_is_superhost, number_of_reviews, review_scores_rating, estimated_occupancy_l365d, estimated_revenue_l365d</code></p>
+
+  <h2 style="color:#93c5fd;">Header Relationships</h2>
+  <ul>
+    <li><b>id</b> is the listing key.</li>
+    <li><b>price</b> and <b>estimated_occupancy_l365d</b> jointly drive <b>estimated_revenue_l365d</b>.</li>
+    <li><b>room_type/property_type/capacity</b> explain listing market positioning.</li>
+    <li><b>host_is_superhost</b> and review metrics represent trust and quality signals.</li>
+    <li><b>neighbourhood_cleansed</b> captures location-driven demand differences.</li>
+  </ul>
+  <hr style="border-color:#2b385e;">
+</div>
 <main><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs" id="cell-id=28337ffd-1766-4d7c-a087-709d80c3fb98">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">

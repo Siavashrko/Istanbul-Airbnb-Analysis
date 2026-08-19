@@ -8,6 +8,37 @@ This project analyzes Istanbul Airbnb listings to identify what drives listing s
 The core business question is:
 **Why are many listings inactive, and which factors are associated with higher occupancy and revenue?**
 
+## Introduction
+Istanbul has thousands of Airbnb listings, but listing availability does not guarantee market performance. This project builds a data-driven market review to understand which listings are active, which are inactive, and what characteristics separate both groups.
+
+## Problem Statement
+During early exploration, a large share of listings showed zero estimated occupancy over the previous 365 days. This indicates a performance gap in the market and raises a core business question:
+- Why do some listings attract bookings while many others remain inactive?
+
+## Goal
+Build an analytical framework that identifies success signals in Istanbul Airbnb listings by measuring:
+1. Occupancy activity
+2. Revenue potential
+3. Price positioning by neighborhood and listing profile
+
+## Factors Used
+The analysis focuses on factors with direct business relevance:
+- **Location:** `neighbourhood_cleansed`
+- **Listing format:** `room_type`, `property_type`
+- **Capacity/features:** `accommodates`, `bedrooms`, `beds`, `bathrooms`
+- **Host quality:** `host_is_superhost`
+- **Demand/engagement:** `number_of_reviews`, `review_scores_rating`
+- **Performance targets:** `estimated_occupancy_l365d`, `estimated_revenue_l365d`, `price`
+
+## How the Goal Was Detected from Data
+The goal was not assumed before analysis. It was discovered through structured data review:
+1. Audit of missing values and dtypes
+2. Price outlier detection and correction
+3. Distribution checks for occupancy and revenue
+4. Active vs inactive segmentation using `estimated_occupancy_l365d`
+
+This process revealed that inactive listings form a major market share, so the project was framed around explaining that gap.
+
 ---
 
 ## Data Source
@@ -15,6 +46,42 @@ The core business question is:
 - **Snapshot:** 30 June 2026
 - **Main file used for analysis:** `listings.csv.gz`
 - **Supporting files:** `calendar.csv.gz`, `reviews.csv.gz`, `neighbourhoods.csv`, `neighbourhoods.geojson`
+
+## Data Headers (Column Groups)
+To keep analysis readable, headers were grouped by role:
+
+### Listing identity
+- `id`
+
+### Location headers
+- `neighbourhood_cleansed`
+
+### Listing type headers
+- `room_type`
+- `property_type`
+
+### Price and performance headers
+- `price`
+- `estimated_occupancy_l365d`
+- `estimated_revenue_l365d`
+
+### Capacity headers
+- `accommodates`
+- `bedrooms`
+- `beds`
+- `bathrooms`
+
+### Host and reputation headers
+- `host_is_superhost`
+- `number_of_reviews`
+- `review_scores_rating`
+
+## Header Relationships
+- `id` is the unique listing key.
+- `price` + `estimated_occupancy_l365d` jointly influence `estimated_revenue_l365d`.
+- `room_type`, `property_type`, and capacity headers explain listing positioning.
+- `host_is_superhost` and review metrics capture trust and service quality.
+- `neighbourhood_cleansed` captures geographic demand effects.
 
 ---
 
