@@ -1,91 +1,159 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Istanbul Airbnb Analysis</title>
-  <style>
-    body { font-family: Arial, sans-serif; max-width: 900px; margin: 0 auto; padding: 32px 20px; line-height: 1.6; color: #111; background: #fff; }
-    h1, h2, h3 { margin-bottom: 0.4em; }
-    section { margin: 24px 0; padding-bottom: 16px; border-bottom: 1px solid #e6e6e6; }
-    ul { margin-top: 0.5em; }
-    .meta { color: #555; }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Istanbul Airbnb Market Analysis (2026)</title>
+<style>
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif; max-width: 960px; margin: 0 auto; padding: 40px 20px; line-height: 1.6; color: #333; background: #fff; }
+h1 { font-size: 2.5em; margin: 0 0 0.5em 0; }
+h2 { font-size: 1.8em; margin: 1.2em 0 0.4em 0; border-bottom: 2px solid #eee; padding-bottom: 0.3em; }
+h3 { font-size: 1.2em; margin: 0.8em 0 0.3em 0; }
+p { margin: 0.8em 0; }
+ul, ol { margin: 0.8em 0; padding-left: 24px; }
+li { margin: 0.4em 0; }
+code { background: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: monospace; }
+.intro { font-size: 1.1em; color: #555; }
+</style>
 </head>
 <body>
-  <h1>Istanbul Airbnb Market Analysis (2026)</h1>
-  <p class="meta">A clean project page with the full analysis structure.</p>
 
-  <section>
-    <h2>Introduction</h2>
-    <p>Istanbul has thousands of Airbnb listings, but availability does not guarantee performance. This project reviews the market to understand which listings are active, which are inactive, and what separates both groups.</p>
-  </section>
+<h1>Istanbul Airbnb Market Analysis (2026)</h1>
 
-  <section>
-    <h2>Problem Statement</h2>
-    <p>A large share of listings showed zero estimated occupancy over the previous 365 days. The core question is why some listings attract bookings while many others remain inactive.</p>
-  </section>
+<p class="intro">This project analyzes Istanbul Airbnb listings to identify what drives listing success using real market data from Inside Airbnb.</p>
 
-  <section>
-    <h2>Goal</h2>
-    <p>Identify success signals in Istanbul Airbnb listings by measuring occupancy activity, revenue potential, and price positioning by neighborhood and listing profile.</p>
-  </section>
+<h2>Introduction</h2>
+<p>Istanbul has thousands of Airbnb listings, but listing availability does not guarantee market performance. This project builds a data-driven market review to understand which listings are active, which are inactive, and what characteristics separate both groups.</p>
 
-  <section>
-    <h2>Data Summary</h2>
-    <ul>
-      <li>Source: Inside Airbnb</li>
-      <li>Snapshot: 30 June 2026</li>
-      <li>Main file: listings.csv.gz</li>
-      <li>Supporting files: calendar.csv.gz, reviews.csv.gz, neighbourhoods.csv, neighbourhoods.geojson</li>
-      <li>Initial listings: 26,631</li>
-      <li>Cleaned sample: 23,467</li>
-    </ul>
-  </section>
+<h2>Problem Statement</h2>
+<p>During early exploration, a large share of listings showed zero estimated occupancy over the previous 365 days. This indicates a performance gap in the market and raises a core business question:</p>
+<ul>
+<li>Why do some listings attract bookings while many others remain inactive?</li>
+</ul>
 
-  <section>
-    <h2>Data Structure</h2>
-    <p>The analysis is organized around the listing-level grain in listings.csv.gz. Calendar and reviews files are supporting datasets and should be aggregated before joining to listings.</p>
-    <h3>Data Headers</h3>
-    <ul>
-      <li>id</li>
-      <li>neighbourhood_cleansed</li>
-      <li>room_type, property_type</li>
-      <li>price, estimated_occupancy_l365d, estimated_revenue_l365d</li>
-      <li>accommodates, bedrooms, beds, bathrooms</li>
-      <li>host_is_superhost, number_of_reviews, review_scores_rating</li>
-    </ul>
-    <h3>Header Relationships</h3>
-    <ul>
-      <li>id is the unique listing key.</li>
-      <li>price and estimated_occupancy_l365d jointly influence estimated_revenue_l365d.</li>
-      <li>room_type, property_type, and capacity explain listing positioning.</li>
-      <li>host_is_superhost and review metrics capture trust and service quality.</li>
-      <li>neighbourhood_cleansed captures geographic demand effects.</li>
-    </ul>
-  </section>
+<h2>Goal</h2>
+<p>Build an analytical framework that identifies success signals in Istanbul Airbnb listings by measuring:</p>
+<ol>
+<li>Occupancy activity</li>
+<li>Revenue potential</li>
+<li>Price positioning by neighborhood and listing profile</li>
+</ol>
 
-  <section>
-    <h2>Data Review</h2>
-    <p>Missing values were found in beds, bathrooms, and review_scores_rating. Extreme price outliers were also detected and removed to keep averages meaningful.</p>
-  </section>
+<h2>Factors Used</h2>
+<p>The analysis focuses on factors with direct business relevance:</p>
+<ul>
+<li><strong>Location:</strong> <code>neighbourhood_cleansed</code></li>
+<li><strong>Listing format:</strong> <code>room_type</code>, <code>property_type</code></li>
+<li><strong>Capacity/features:</strong> <code>accommodates</code>, <code>bedrooms</code>, <code>beds</code>, <code>bathrooms</code></li>
+<li><strong>Host quality:</strong> <code>host_is_superhost</code></li>
+<li><strong>Demand/engagement:</strong> <code>number_of_reviews</code>, <code>review_scores_rating</code></li>
+<li><strong>Performance targets:</strong> <code>estimated_occupancy_l365d</code>, <code>estimated_revenue_l365d</code>, <code>price</code></li>
+</ul>
 
-  <section>
-    <h2>EDA</h2>
-    <p>The exploratory analysis compared active and inactive listings, neighborhood performance, room type distribution, and superhost impact.</p>
-  </section>
+<h2>How the Goal Was Detected from Data</h2>
+<p>The goal was not assumed before analysis. It was discovered through structured data review:</p>
+<ol>
+<li>Audit of missing values and dtypes</li>
+<li>Price outlier detection and correction</li>
+<li>Distribution checks for occupancy and revenue</li>
+<li>Active vs inactive segmentation using <code>estimated_occupancy_l365d</code></li>
+</ol>
+<p>This process revealed that inactive listings form a major market share, so the project was framed around explaining that gap.</p>
 
-  <section>
-    <h2>Report</h2>
-    <h3>Findings</h3>
-    <ul>
-      <li>Market concentration is strongest in Beyoglu.</li>
-      <li>Active listings are mostly entire homes/apartments.</li>
-      <li>Superhost share is much higher in active listings.</li>
-      <li>Active listings have a much higher median price than inactive listings.</li>
-    </ul>
-    <h3>Conclusion</h3>
-    <p>The Istanbul Airbnb market is split between active and inactive listings. Location, room type, host trust, and pricing all shape performance.</p>
-  </section>
+<h2>Data Source</h2>
+<ul>
+<li><strong>Source:</strong> Inside Airbnb (Istanbul, Marmara, Turkey)</li>
+<li><strong>Snapshot:</strong> 30 June 2026</li>
+<li><strong>Main file used for analysis:</strong> <code>listings.csv.gz</code></li>
+<li><strong>Supporting files:</strong> <code>calendar.csv.gz</code>, <code>reviews.csv.gz</code>, <code>neighbourhoods.csv</code>, <code>neighbourhoods.geojson</code></li>
+</ul>
+
+<h2>Data Headers (Column Groups)</h2>
+<p>To keep analysis readable, headers were grouped by role:</p>
+
+<h3>Listing identity</h3>
+<ul><li><code>id</code></li></ul>
+
+<h3>Location headers</h3>
+<ul><li><code>neighbourhood_cleansed</code></li></ul>
+
+<h3>Listing type headers</h3>
+<ul>
+<li><code>room_type</code></li>
+<li><code>property_type</code></li>
+</ul>
+
+<h3>Price and performance headers</h3>
+<ul>
+<li><code>price</code></li>
+<li><code>estimated_occupancy_l365d</code></li>
+<li><code>estimated_revenue_l365d</code></li>
+</ul>
+
+<h3>Capacity headers</h3>
+<ul>
+<li><code>accommodates</code></li>
+<li><code>bedrooms</code></li>
+<li><code>beds</code></li>
+<li><code>bathrooms</code></li>
+</ul>
+
+<h3>Host and reputation headers</h3>
+<ul>
+<li><code>host_is_superhost</code></li>
+<li><code>number_of_reviews</code></li>
+<li><code>review_scores_rating</code></li>
+</ul>
+
+<h2>Header Relationships</h2>
+<ul>
+<li><code>id</code> is the unique listing key.</li>
+<li><code>price</code> + <code>estimated_occupancy_l365d</code> jointly influence <code>estimated_revenue_l365d</code>.</li>
+<li><code>room_type</code>, <code>property_type</code>, and capacity headers explain listing positioning.</li>
+<li><code>host_is_superhost</code> and review metrics capture trust and service quality.</li>
+<li><code>neighbourhood_cleansed</code> captures geographic demand effects.</li>
+</ul>
+
+<h2>Data Review</h2>
+<ul>
+<li>Initial listings: <strong>26,631</strong></li>
+<li>Cleaned analytical sample: <strong>23,467</strong></li>
+<li>Key quality issues found:</li>
+<ul>
+<li>Missing values in <code>beds</code>, <code>bathrooms</code>, <code>review_scores_rating</code></li>
+<li>Extreme price outliers that distort averages</li>
+</ul>
+<li>Key segmentation:</li>
+<ul>
+<li><strong>Active listings:</strong> occupancy > 0</li>
+<li><strong>Inactive listings:</strong> occupancy = 0</li>
+</ul>
+</ul>
+
+<h2>Key Findings</h2>
+<ol>
+<li><strong>Market concentration:</strong> Active demand is heavily concentrated in a few areas, especially Beyoglu.</li>
+<li><strong>Room type effect:</strong> Active listings are mostly entire homes/apartments.</li>
+<li><strong>Host quality effect:</strong> Superhost share is much higher in active listings than inactive listings.</li>
+<li><strong>Price-performance split:</strong> Active listings have a much higher median price than inactive listings.</li>
+</ol>
+
+<h2>Visualizations</h2>
+<ul>
+<li><a href="visuals/occupancy_by_neighborhood.png">Median Occupancy by Neighborhood</a></li>
+<li><a href="visuals/revenue_by_neighborhood.png">Median Revenue by Neighborhood</a></li>
+<li><a href="visuals/room_type_comparison.png">Room Type: Active vs Inactive</a></li>
+<li><a href="visuals/superhost_comparison.png">Superhost: Active vs Inactive</a></li>
+<li><a href="visuals/price_distribution.png">Price Distribution: Active vs Inactive</a></li>
+</ul>
+
+<h2>Business Recommendations</h2>
+<ul>
+<li>Prioritize neighborhoods with proven occupancy performance.</li>
+<li>Favor listing formats aligned with active demand (entire home/apt).</li>
+<li>Improve host trust signals (Superhost pathway, response quality).</li>
+<li>Use neighborhood-aware pricing instead of one generic pricing strategy.</li>
+</ul>
+
 </body>
 </html>
