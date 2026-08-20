@@ -5,27 +5,87 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Istanbul Airbnb Analysis</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; background: #fff; color: #111; }
-    .wrap { max-width: 980px; margin: 0 auto; padding: 32px 24px; }
-    .cell { border: 1px solid #e5e5e5; border-radius: 10px; padding: 18px 20px; margin: 0 0 18px; background: #fff; }
-    .prompt { font-weight: 700; color: #666; margin-bottom: 8px; }
-    h1, h2, h3 { margin-top: 0; }
-    ul { margin-top: 8px; }
-    a { color: #0b57d0; }
+    body { font-family: Arial, sans-serif; max-width: 900px; margin: 0 auto; padding: 32px 20px; line-height: 1.6; color: #111; background: #fff; }
+    h1, h2, h3 { margin-bottom: 0.4em; }
+    section { margin: 24px 0; padding-bottom: 16px; border-bottom: 1px solid #e6e6e6; }
+    ul { margin-top: 0.5em; }
+    .meta { color: #555; }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="cell"><div class="prompt">#</div><h1>Istanbul Airbnb Market Analysis (2026)</h1><p>This project analyzes Istanbul Airbnb listings to identify what drives listing success using real market data from Inside Airbnb.</p></div>
-    <div class="cell"><div class="prompt">##</div><h2>Introduction</h2><p>Istanbul has thousands of Airbnb listings, but listing availability does not guarantee market performance. This project builds a data-driven market review to understand which listings are active, which are inactive, and what characteristics separate both groups.</p></div>
-    <div class="cell"><div class="prompt">##</div><h2>Problem Statement</h2><p>A large share of listings showed zero estimated occupancy over the previous 365 days. That creates the main question: why do some listings attract bookings while many remain inactive?</p></div>
-    <div class="cell"><div class="prompt">##</div><h2>Goal</h2><p>Build an analytical framework that identifies success signals in Istanbul Airbnb listings by measuring occupancy activity, revenue potential, and price positioning by neighborhood and listing profile.</p></div>
-    <div class="cell"><div class="prompt">##</div><h2>Data Summary</h2><ul><li>Source: Inside Airbnb</li><li>Snapshot: 30 June 2026</li><li>Main file: listings.csv.gz</li><li>Supporting files: calendar.csv.gz, reviews.csv.gz, neighbourhoods.csv, neighbourhoods.geojson</li><li>Initial listings: 26,631</li><li>Cleaned sample: 23,467</li></ul></div>
-    <div class="cell"><div class="prompt">##</div><h2>Data Structure</h2><p>The analysis is organized around the listing-level grain in listings.csv.gz. Calendar and reviews files are supporting datasets and should be aggregated before joining to listings.</p><h3>Data Headers</h3><ul><li>id</li><li>neighbourhood_cleansed</li><li>room_type, property_type</li><li>price, estimated_occupancy_l365d, estimated_revenue_l365d</li><li>accommodates, bedrooms, beds, bathrooms</li><li>host_is_superhost, number_of_reviews, review_scores_rating</li></ul><h3>Header Relationships</h3><ul><li>id is the unique listing key.</li><li>price and estimated_occupancy_l365d jointly influence estimated_revenue_l365d.</li><li>room_type, property_type, and capacity explain listing positioning.</li><li>host_is_superhost and review metrics capture trust and service quality.</li><li>neighbourhood_cleansed captures geographic demand effects.</li></ul></div>
-    <div class="cell"><div class="prompt">##</div><h2>Data Review</h2><p>Missing values were found in beds, bathrooms, and review_scores_rating. Extreme price outliers were also detected and removed to keep averages meaningful.</p></div>
-    <div class="cell"><div class="prompt">##</div><h2>EDA</h2><p>The exploratory analysis compared active and inactive listings, neighborhood performance, room type distribution, and superhost impact.</p></div>
-    <div class="cell"><div class="prompt">##</div><h2>Report</h2><h3>Findings</h3><ul><li>Market concentration is strongest in Beyoglu.</li><li>Active listings are mostly entire homes/apartments.</li><li>Superhost share is much higher in active listings.</li><li>Active listings have a much higher median price than inactive listings.</li></ul><h3>Conclusion</h3><p>The Istanbul Airbnb market is split between active and inactive listings. Location, room type, host trust, and pricing all shape performance.</p></div>
-    <div class="cell"><div class="prompt">##</div><h2>Visuals</h2><ul><li><a href="visuals/occupancy_by_neighborhood.png">Occupancy by Neighborhood</a></li><li><a href="visuals/revenue_by_neighborhood.png">Revenue by Neighborhood</a></li><li><a href="visuals/room_type_comparison.png">Room Type Comparison</a></li><li><a href="visuals/superhost_comparison.png">Superhost Comparison</a></li><li><a href="visuals/price_distribution.png">Price Distribution</a></li></ul></div>
-  </div>
+  <h1>Istanbul Airbnb Market Analysis (2026)</h1>
+  <p class="meta">A clean project page with the full analysis structure.</p>
+
+  <section>
+    <h2>Introduction</h2>
+    <p>Istanbul has thousands of Airbnb listings, but availability does not guarantee performance. This project reviews the market to understand which listings are active, which are inactive, and what separates both groups.</p>
+  </section>
+
+  <section>
+    <h2>Problem Statement</h2>
+    <p>A large share of listings showed zero estimated occupancy over the previous 365 days. The core question is why some listings attract bookings while many others remain inactive.</p>
+  </section>
+
+  <section>
+    <h2>Goal</h2>
+    <p>Identify success signals in Istanbul Airbnb listings by measuring occupancy activity, revenue potential, and price positioning by neighborhood and listing profile.</p>
+  </section>
+
+  <section>
+    <h2>Data Summary</h2>
+    <ul>
+      <li>Source: Inside Airbnb</li>
+      <li>Snapshot: 30 June 2026</li>
+      <li>Main file: listings.csv.gz</li>
+      <li>Supporting files: calendar.csv.gz, reviews.csv.gz, neighbourhoods.csv, neighbourhoods.geojson</li>
+      <li>Initial listings: 26,631</li>
+      <li>Cleaned sample: 23,467</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Data Structure</h2>
+    <p>The analysis is organized around the listing-level grain in listings.csv.gz. Calendar and reviews files are supporting datasets and should be aggregated before joining to listings.</p>
+    <h3>Data Headers</h3>
+    <ul>
+      <li>id</li>
+      <li>neighbourhood_cleansed</li>
+      <li>room_type, property_type</li>
+      <li>price, estimated_occupancy_l365d, estimated_revenue_l365d</li>
+      <li>accommodates, bedrooms, beds, bathrooms</li>
+      <li>host_is_superhost, number_of_reviews, review_scores_rating</li>
+    </ul>
+    <h3>Header Relationships</h3>
+    <ul>
+      <li>id is the unique listing key.</li>
+      <li>price and estimated_occupancy_l365d jointly influence estimated_revenue_l365d.</li>
+      <li>room_type, property_type, and capacity explain listing positioning.</li>
+      <li>host_is_superhost and review metrics capture trust and service quality.</li>
+      <li>neighbourhood_cleansed captures geographic demand effects.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Data Review</h2>
+    <p>Missing values were found in beds, bathrooms, and review_scores_rating. Extreme price outliers were also detected and removed to keep averages meaningful.</p>
+  </section>
+
+  <section>
+    <h2>EDA</h2>
+    <p>The exploratory analysis compared active and inactive listings, neighborhood performance, room type distribution, and superhost impact.</p>
+  </section>
+
+  <section>
+    <h2>Report</h2>
+    <h3>Findings</h3>
+    <ul>
+      <li>Market concentration is strongest in Beyoglu.</li>
+      <li>Active listings are mostly entire homes/apartments.</li>
+      <li>Superhost share is much higher in active listings.</li>
+      <li>Active listings have a much higher median price than inactive listings.</li>
+    </ul>
+    <h3>Conclusion</h3>
+    <p>The Istanbul Airbnb market is split between active and inactive listings. Location, room type, host trust, and pricing all shape performance.</p>
+  </section>
 </body>
 </html>
